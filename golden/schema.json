@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/agent-trajectory-gate/golden/case.schema.json",
+  "title": "AgentTrajectoryGateCase",
+  "description": "Golden eval case for tool-calling trajectory scoring (fixture or live).",
+  "type": "object",
+  "required": ["id", "input", "expected", "fixture"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable case id, e.g. triage-001"
+    },
+    "input": {
+      "type": "string",
+      "minLength": 1,
+      "description": "User message to the triage agent"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Filters e.g. quick, happy, fail_demo"
+    },
+    "case_type": {
+      "type": "string",
+      "description": "happy_path | list_only | order_trap | adversarial | multi_step | edge | regression | deliberate_fail"
+    },
+    "notes": { "type": "string" },
+    "expected": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "must_call_tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "must_not_call_tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "optional_tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "order_constraints": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "create_bug": { "type": "object" },
+        "assign_owner": { "type": "object" },
+        "answer_must_include": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "answer_must_not_include": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "store": { "type": "object" }
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "required": ["final_answer"],
+      "additionalProperties": true,
+      "properties": {
+        "replay": { "type": "boolean", "default": true },
+        "final_answer": { "type": "string" },
+        "answer": { "type": "string" },
+        "trajectory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string" },
+              "tool": { "type": "string" },
+              "name": { "type": "string" },
+              "args": { "type": "object" },
+              "arguments": { "type": "object" },
+              "result": { "type": "object" },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        "steps": { "type": "array" }
+      }
+    }
+  }
+}

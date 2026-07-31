@@ -1,0 +1,65 @@
+schema: spec-driven
+
+# Shown to AI when creating/updating OpenSpec artifacts
+context: |
+  Project: Agent Trajectory Gate (Portfolio Project 7 — AI Test Engineer / GenAI Quality)
+  Owner: Nilima Satapathy
+  Domain: Evaluation of tool-calling agent trajectories (path correctness, not chat quality alone)
+
+  Positioning (CRITICAL — not another chatbot / not RAG eval):
+    DocQ (P3) = consumer RAG *product* (chat over PDFs + citations).
+    LLM Eval Dashboard (P4) = batch golden/red-team for a *chat assistant*.
+    QA Sentinel (P5) = live chat *with* online answer quality gate.
+    ChainVerdict (P6) = LangChain RAG under test + LangSmith + DeepEval.
+    Agent Trajectory Gate (P7) = tool-calling *agent* is the SUT;
+      tools are author-defined; the harness scores the *trajectory*
+      (which tools, order, args, side effects) + final answer consistency.
+      UI is a Trajectory Lab Console — NOT multi-turn chat as the home screen.
+
+  Core truth (must never invert):
+    - Tools are written by the engineer (Python + schemas).
+    - The LLM does NOT invent/create tools at runtime in MVP.
+    - Real AI (free-tier Groq OpenAI-compatible) plans and *calls* tools.
+    - Fixture mode enables offline CI without API keys.
+
+  Goal:
+    Prove agent QA skills: multi-step tool-calling loop, trajectory logging,
+    deterministic path gates, agent failure taxonomy, free-tier live runs,
+    optional LLM-as-judge, batch suite + CI, professional trajectory inspector UI.
+
+  Stack (locked):
+    - Python 3.11+
+    - OpenAI-compatible client (Groq free tier) for live tool-calling
+    - Pytest + GitHub Actions
+    - Streamlit as Trajectory Console (lab-first UX; Live Probe secondary)
+    - Optional SQLite for run history
+    - Path: C:\Users\admin\Code\agent-trajectory-gate
+
+  Constraints:
+    - Must not present as "chat with your agent" product-first
+    - Must not copy DocQ/QA Sentinel chat-home layout
+    - Default CI path works offline (fixture SUT)
+    - Portfolio scope — not multi-tenant SaaS
+    - Distinct from ChainVerdict (agents/tools, not RAG faithfulness)
+
+  Portfolio stack context:
+    P1 API · P2 Playwright · P3 DocQ · P4 LLM Eval Dashboard ·
+    P5 QA Sentinel · P6 ChainVerdict · P7 Agent Trajectory Gate (this project)
+
+rules:
+  proposal:
+    - Lead with differentiation from DocQ / P4 / P5 / P6
+    - State tools are author-defined (agent does not create tools)
+    - Include Non-goals; stretch ideas separate from MVP
+  design:
+    - Agent loop = SUT; scorer = gate; console = path inspector
+    - Lab console UI first; Live Probe secondary
+    - Failure taxonomy is first-class
+    - Free-tier meter + fixture CI required
+  tasks:
+    - Order: identity → scaffold → tools → fixture → scoring → taxonomy → golden → live agent → judge → runner → console → CI → docs
+    - Each task verifiable; live tasks opt-in with keys
+  specs:
+    - Use SHALL/MUST language
+    - Every requirement needs at least one WHEN/THEN scenario
+    - Specs must not require a consumer multi-turn chat home
