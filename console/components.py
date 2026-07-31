@@ -83,24 +83,25 @@ div[data-testid="stToolbar"] { display: none; }
   z-index: 1;
 }
 
-/* —— Sidebar: solid slab, not soft cream —— */
+/* Sidebar fully removed — app is main-column only */
 section[data-testid="stSidebar"] {
-  background: #080A10 !important;
-  border-right: 1px solid var(--line) !important;
+  display: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  visibility: hidden !important;
 }
-section[data-testid="stSidebar"] > div:first-child {
-  background: #080A10 !important;
-  padding-top: 1.1rem !important;
+div[data-testid="stSidebarCollapsedControl"],
+button[kind="header"] {
+  display: none !important;
 }
-section[data-testid="stSidebar"] * {
-  color: var(--ink) !important;
+/* reclaim full width when sidebar is gone */
+section[data-testid="stMain"] {
+  margin-left: 0 !important;
 }
-section[data-testid="stSidebar"] .stRadio label {
-  font-size: 0.78rem !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  padding: 0.35rem 0 !important;
+.stApp > header {
+  background: transparent !important;
 }
+
 
 /* form controls */
 .stSelectbox label, .stTextInput label, .stTextArea label, .stRadio label {

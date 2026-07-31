@@ -39,8 +39,9 @@ st.set_page_config(
     page_title="Agent Trajectory Gate",
     page_icon="⬡",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
+
 
 
 def _init_state() -> None:
@@ -569,34 +570,33 @@ def main() -> None:
         "RIG": page_rig,
     }
 
-    with st.sidebar:
-        st.markdown(
-            """
-<div class="nc-sb">
-  <div class="nc-sb-mark">⬡</div>
-  <div class="nc-sb-name">Agent Trajectory<br/><span>Gate</span></div>
-  <div class="nc-sb-tag">Path under test<br/>Not a chatbot</div>
-</div>
-""",
-            unsafe_allow_html=True,
+    # Top channel nav only — no sidebar panel
+    s = get_settings()
+    top_l, top_r = st.columns([3.2, 1.2])
+    with top_l:
+        nav = st.segmented_control(
+            "Channel",
+            options=list(nav_items.keys()),
+            default=st.session_state.get("nav") or "TRACE",
+            key="nav_main",
+            label_visibility="collapsed",
         )
-        nav = st.radio(
-            "CHANNEL",
-            list(nav_items.keys()),
-            key="nav",
-        )
-        st.markdown("---")
-        s = get_settings()
+        if nav:
+            st.session_state.nav = nav
+    with top_r:
         st.markdown(
             chip("LAB", "mode")
             + " "
             + (chip("KEY", "PASS") if s.has_llm_key else chip("NO KEY", "FAIL")),
             unsafe_allow_html=True,
         )
-        st.caption("Agent Trajectory Gate · P7")
 
-    nav_items[nav]()
+    page = st.session_state.get("nav") or "TRACE"
+    if page not in nav_items:
+        page = "TRACE"
+    nav_items[page]()
 
 
 if __name__ == "__main__":
     main()
+
