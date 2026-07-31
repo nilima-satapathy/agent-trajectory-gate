@@ -5,6 +5,13 @@
 **Portfolio Project 7** — AI Test Engineer / GenAI Quality  
 **Tagline:** *Tool-calling agents under test · Trajectory scores · Ship gates*
 
+**GitHub:** https://github.com/nilima-satapathy/agent-trajectory-gate  
+
+**Deploy (Streamlit Community Cloud):**  
+https://share.streamlit.io/deploy?repository=nilima-satapathy%2Fagent-trajectory-gate&branch=main&mainModule=console%2Fapp.py  
+
+Main file: `console/app.py` · Branch: `main`
+
 Planned with [OpenSpec](https://openspec.dev/).
 
 ---
@@ -63,7 +70,7 @@ python -m streamlit run console/app.py
 ```env
 OPENAI_BASE_URL=https://api.groq.com/openai/v1
 OPENAI_API_KEY=gsk_...
-OPENAI_MODEL=llama-3.3-70b-versatile
+OPENAI_MODEL=llama-3.1-8b-instant
 ```
 
 ```powershell
@@ -79,16 +86,35 @@ Live tests are **not** required in CI (no secrets). Use them locally for demos.
 
 | Nav | Purpose |
 |-----|---------|
-| **Suite Run** (home) | Run quick/full fixture suite · KPIs · table · timeline |
-| **Cases** | Browse/filter golden set · run one case |
-| **Live Probe** | Single live Groq tool-calling probe |
-| **Reports** | `last_run.json` + live_runs |
-| **Setup** | Key/mode/judge checklist · free-tier meter |
+| **TRACE** (home) | Run quick/full suite · fixture or live agent · path scores |
+| **CATALOG** | Browse/filter golden set · run one case |
+| **LIVE** | Single live tool-calling probe |
+| **ARCHIVE** | Reports + live dumps |
+| **RIG** | Key/mode/judge checklist · free-tier meter |
 
 ```powershell
 python -m streamlit run console/app.py
 # Local URL: http://localhost:8501
 ```
+
+---
+
+## Deploy (Streamlit Community Cloud)
+
+1. Open: https://share.streamlit.io/deploy?repository=nilima-satapathy%2Fagent-trajectory-gate&branch=main&mainModule=console%2Fapp.py  
+2. Confirm repo / branch `main` / file `console/app.py`  
+3. **Secrets** (optional for LIVE; fixture works without):
+
+```toml
+OPENAI_BASE_URL = "https://api.groq.com/openai/v1"
+OPENAI_API_KEY = "gsk_..."
+OPENAI_MODEL = "llama-3.1-8b-instant"
+JUDGE_ENABLED = "true"
+SUT_MODE = "fixture"
+MAX_TOOL_STEPS = "6"
+```
+
+4. Deploy → public `*.streamlit.app` URL (choose a custom subdomain if offered).
 
 ---
 
