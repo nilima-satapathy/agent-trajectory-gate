@@ -20,7 +20,7 @@ Engineer defines tools (Python)
         ↓
 User question (QA ticket triage)
         ↓
-Real LLM (Groq free tier) plans + calls tools
+Real LLM plans + calls tools
    — or offline FixtureSUT for CI
         ↓
 Trajectory log (tool → args → result → …)
@@ -38,7 +38,7 @@ Trajectory Console (lab UI) · reports/ · Pytest CI
 | Role | Who |
 |------|-----|
 | Defines tools | **You** (author-defined registry) |
-| Calls tools | **Real AI** (free-tier Groq tool-calling) |
+| Calls tools | **Real AI** (tool-calling) |
 | Scores the path | **This harness** (L1/L2/L3 + taxonomy) |
 
 The agent does **not** invent tools with AI. See [docs/NOT_CHATBOT.md](docs/NOT_CHATBOT.md).
