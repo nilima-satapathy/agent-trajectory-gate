@@ -91,27 +91,7 @@ Live tests are **not** required in CI (no secrets). Use them locally for demos.
 
 ```powershell
 python -m streamlit run console/app.py
-# Local URL: http://localhost:8501
 ```
-
----
-
-## Deploy (Streamlit Community Cloud)
-
-1. Open: https://share.streamlit.io/deploy?repository=nilima-satapathy%2Fagent-trajectory-gate&branch=main&mainModule=console%2Fapp.py  
-2. Confirm repo / branch `main` / file `console/app.py`  
-3. **Secrets** (optional for LIVE; fixture works without):
-
-```toml
-OPENAI_BASE_URL = "https://api.groq.com/openai/v1"
-OPENAI_API_KEY = "gsk_..."
-OPENAI_MODEL = "llama-3.1-8b-instant"
-JUDGE_ENABLED = "true"
-SUT_MODE = "fixture"
-MAX_TOOL_STEPS = "6"
-```
-
-4. Deploy → public `*.streamlit.app` URL (choose a custom subdomain if offered).
 
 ---
 
@@ -128,7 +108,7 @@ MAX_TOOL_STEPS = "6"
 ## Stack
 
 - Python 3.11+ · Pytest · Streamlit
-- OpenAI-compatible client (**Groq** free tier)
+- OpenAI-compatible client (**Groq**)
 - GitHub Actions (offline only)
 - Optional L3 judge (off by default)
 
