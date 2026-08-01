@@ -5,10 +5,7 @@
 **Portfolio Project 7** — AI Test Engineer / GenAI Quality  
 **Tagline:** *Tool-calling agents under test · Trajectory scores · Ship gates*
 
-**GitHub:** https://github.com/nilima-satapathy/agent-trajectory-gate  
-
-**Deploy (Streamlit Community Cloud):**  
-https://share.streamlit.io/deploy?repository=nilima-satapathy%2Fagent-trajectory-gate&branch=main&mainModule=console%2Fapp.py  
+**GitHub:** https://github.com/nilima-satapathy/agent-trajectory-gate   
 
 Main file: `console/app.py` · Branch: `main`
 
